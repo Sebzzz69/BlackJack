@@ -284,7 +284,7 @@ namespace BlackJack
 
         /*private void PrintWholeDeck(Deck deck)
         {
-            Console.WriteLine("Deck: ");
+            Console.WriteLine("Deck:  ");
             for (int i = 0; i < 312; i++)
             {
                 Console.Write("{0, -25}", deck.DealCard());
