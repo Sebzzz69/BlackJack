@@ -147,7 +147,7 @@ namespace BlackJack
             }
 
             // UI
-            Console.Clear();
+            SConsole.Clear();
             Console.WriteLine("Your Cards: ");
             playerHand.ShowCards();
             Console.ForegroundColor = ConsoleColor.Red;
@@ -177,13 +177,14 @@ namespace BlackJack
         {
             gameRunning = false;
 
+            // Doubeling down only gives one card
+            playerHand.DrawCard(gameDeck);
+
             while (dealerHand.handValue <= 17)
             {
                 dealerHand.DrawCard(gameDeck);
             }
 
-            // Doubeling down only gives one card
-            playerHand.DrawCard(gameDeck);
 
             // then ends game
             CheckGameStatus();

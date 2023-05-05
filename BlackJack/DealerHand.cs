@@ -50,9 +50,9 @@ namespace BlackJack
 
             if (currentCard < hand.Length)
             {
-                    Console.WriteLine(hand[1]);
+                Console.WriteLine(hand[1]);
             }
-        
+                        
             return hand[currentCard++];
             
         }

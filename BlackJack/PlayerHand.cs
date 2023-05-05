@@ -25,8 +25,9 @@ namespace BlackJack
             {
                 hand[i] = playableDeck.DealCard();
 
-                //Calculate a value of the total hand
+                // Calculate a value of the total hand
                 handValue += hand[i].value;
+
 
                 currentCard = i;
                 amountOfCards++;
@@ -43,7 +44,19 @@ namespace BlackJack
 
             // Add new card value to the total hand
             handValue += hand[currentCard].value; 
+
+            // If card dealt is an ace and hand is over 21
+            // then ace is worth 1
+            if(handValue > 21 && hand[currentCard].value == 11)
+            {
+                hand[currentCard].value = 1;
+                handValue += hand[currentCard].value; 
+            }
+           
+
         }
+
+ 
 
         internal Card ShowCards()
         {

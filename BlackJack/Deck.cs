@@ -10,20 +10,20 @@ namespace BlackJack
     {
         private Card[] cardDeck;
         private int currentCard;
-        private const int numberOfCards = 312; // Number of all cards in game
+        private const int numberOfCards = 312; 
         private Random randNum;
 
 
 
         public Deck()
         {
-            // Array for all the faces
+            
             string[] faces = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven",
                               "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
-            // Array for all suites
+
             string[] suite = { "Hearts", "Clubs", "Diamonds", "Spades" };
 
-            int[] cardValue = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10 };
+            int[] cardValue = { 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10 };
 
 
             cardDeck = new Card[numberOfCards];
@@ -33,17 +33,17 @@ namespace BlackJack
             randNum = new Random();
 
             // Fills up deck with cards
-            int j = 0;
+            int currentSuite = 0;
             for (int i = 0; i < cardDeck.Length; i++)
             {                
-                cardDeck[i] = new Card(faces[i % 13], suite[j / 13], cardValue[i % 13]);
+                cardDeck[i] = new Card(faces[i % 13], suite[currentSuite / 13], cardValue[i % 13]);
 
-                j++;
+                currentSuite++;
 
                 // Devides the cards into suites
-                if ((j / 13) == 4)
+                if ((currentSuite / 13) == 4)
                 {
-                    j = 0;
+                    currentSuite = 0;
                 }
                 
 
@@ -52,7 +52,6 @@ namespace BlackJack
 
         internal void ShuffleDeck()
         {
-            currentCard = 0;
             
             // Uses and empty card object to swaps
             // around the cards randomly
