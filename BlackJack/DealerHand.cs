@@ -24,7 +24,7 @@ namespace BlackJack
             {
                 hand[i] = playableDeck.DealCard();
 
-                // Calculate a value of the total hand
+                // Add the card value of the total hand
                 handValue += hand[i].value;
 
                 currentCard = i;
@@ -38,6 +38,7 @@ namespace BlackJack
             currentCard++;
             amountOfCards++;
 
+            // Draws a card from the playable deck
             hand[currentCard] = playableDeck.DealCard();
 
             // Add new card value to the total hand

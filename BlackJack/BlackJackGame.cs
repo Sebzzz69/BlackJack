@@ -15,6 +15,8 @@ namespace BlackJack
         static Deck gameDeck;
 
         bool gameRunning;
+
+        // For when player has taken one card already
         bool playerHit = false;
 
 
@@ -60,7 +62,6 @@ namespace BlackJack
                 {
                     if (playerInput.ToUpper() == "HIT")
                     {
-
                         HitMe();
                         playerHit = true;
                     }
@@ -76,10 +77,9 @@ namespace BlackJack
                     {
                         WrongInput();
                     }
+
                 }
             }
-
-            
         }
 
 
@@ -88,32 +88,6 @@ namespace BlackJack
         {
             gameDeck = new Deck();
             gameDeck.ShuffleDeck();
-        }
-        private void CheckGameStatus()
-        {
-
-            if (dealerHand.handValue > 21)
-            {
-                DealerBust();
-                return;
-            }
-            
-            if (playerHand.handValue > dealerHand.handValue)
-            {
-                PlayerWon();
-                return;
-            }
-            // Dealer Wina
-            else if (playerHand.handValue < dealerHand.handValue)
-            {
-                DealerWon();
-                return;
-            }
-            else if (playerHand.handValue == dealerHand.handValue)
-            {
-                Push();
-                return;
-            }
         }
         private void WrongInput()
         {
@@ -133,6 +107,40 @@ namespace BlackJack
             Console.WriteLine("\nHit or Stand");
         }
 
+        private void CheckGameStatus()
+        {
+
+            if (dealerHand.handValue > 21)
+            {
+                DealerBust();
+                return;
+            }
+            
+            if (playerHand.handValue > dealerHand.handValue)
+            {
+                PlayerWon();
+                return;
+            }
+            // Dealer Wins
+            else if (playerHand.handValue < dealerHand.handValue)
+            {
+                DealerWon();
+                return;
+            }
+            else if (playerHand.handValue == dealerHand.handValue)
+            {
+                Push();
+                return;
+            }
+        }
+        private void CheckDealerHandValue()
+        {
+            while (dealerHand.handValue <= 17)
+            {
+                dealerHand.DrawCard(gameDeck);
+            }
+        }
+
         private void HitMe()
         {
             // Give player a card
@@ -147,7 +155,7 @@ namespace BlackJack
             }
 
             // UI
-            SConsole.Clear();
+            Console.Clear();
             Console.WriteLine("Your Cards: ");
             playerHand.ShowCards();
             Console.ForegroundColor = ConsoleColor.Red;
@@ -166,10 +174,7 @@ namespace BlackJack
             gameRunning = false;
 
             // Draws cards until dealers hand is 17 or above
-            while (dealerHand.handValue <= 17)
-            {
-                dealerHand.DrawCard(gameDeck);
-            }
+            CheckDealerHandValue();
 
             CheckGameStatus();
         }
@@ -180,10 +185,7 @@ namespace BlackJack
             // Doubeling down only gives one card
             playerHand.DrawCard(gameDeck);
 
-            while (dealerHand.handValue <= 17)
-            {
-                dealerHand.DrawCard(gameDeck);
-            }
+            CheckDealerHandValue();
 
 
             // then ends game
@@ -246,6 +248,7 @@ namespace BlackJack
             Console.WriteLine("\nPlayer Won!");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
+
         private void PlayerWon()
         {
             Console.Clear();
@@ -282,6 +285,7 @@ namespace BlackJack
             Console.WriteLine("\nDealer Won!");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
+
 
         /*private void PrintWholeDeck(Deck deck)
         {

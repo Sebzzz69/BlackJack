@@ -36,11 +36,12 @@ namespace BlackJack
             int currentSuite = 0;
             for (int i = 0; i < cardDeck.Length; i++)
             {                
+                // devides into 4 faces, 4 suites, and 13 different card values
                 cardDeck[i] = new Card(faces[i % 13], suite[currentSuite / 13], cardValue[i % 13]);
 
                 currentSuite++;
 
-                // Devides the cards into suites
+                // Devides the cards into 4 suites
                 if ((currentSuite / 13) == 4)
                 {
                     currentSuite = 0;
